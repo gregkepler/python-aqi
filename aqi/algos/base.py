@@ -33,7 +33,10 @@ class BaseAQI(object):
         """
         _iaqis = {}
         for (elem, cc) in ccs:
-            _iaqi = self.iaqi(elem, cc)
+            try:
+                _iaqi = self.iaqi(elem, cc)
+            except Exception as e:
+                _iaqi = None
             if _iaqi is not None:
                 _iaqis[elem] = _iaqi
         _aqi = max(_iaqis.values())
